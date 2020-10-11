@@ -13,46 +13,45 @@ for ( let i=0; i<box.length;i++){
 
 
 
-let W = [];
+let player = [];
 
 
 function currentPlayer() {
     let box = document.querySelectorAll("#board div");
     for (let i = 0; i < box.length; i++) {
         box[i].onclick = function() {
-            if(W.length === 0 && box[i].innerHTML === "") {
+
+            if(player.length === 0 && box[i].innerHTML === "") {
                 box[i].classList.add("square", "X");
                 box[i].innerHTML = "X";
-                W.push("X");
+                player.push("X");
 
                 checkWinner();
-                restart();
+                restartGame();
 
 
 
             }
             else {
-                if (W[W.length - 1] === "X" && box[i].innerHTML === ""){
+                if (player[player.length - 1] === "X" && box[i].innerHTML === ""){
                     box[i].classList.add("square", "O");
                     box[i].innerHTML = "O";
-                    W.push("O");
-
+                    player.push("O");
+                    
                     checkWinner();
-                    restart();
+                    restartGame();
 
 
 
                 }
-                else if (W[W.length - 1] === "O" && box[i].innerHTML === ""){
+                else if (player[player.length - 1] === "O" && box[i].innerHTML === ""){
                     box[i].classList.add("square", "X");
                     box[i].innerHTML = "X";
-                    W.push("X");
+                    player.push("X");
+              
 
                     checkWinner();
-                    restart();
-
-
-
+                    restartGame();
 
                 }
             }
@@ -79,12 +78,11 @@ function hover() {
 
 }
 
-function restart() {
+function restartGame() {
     let squares = document.querySelectorAll("#board div");
     document.getElementsByClassName("btn")[0].addEventListener("click", function() {
-        game.length = 0;
-        for (let j= 0; j < squares.length; j++) {
-            squares[j].innerHTML = "";
+        for (let i= 0; i < squares.length; i++) {
+            squares[i].innerHTML = "";
         }
 
      	document.getElementById("status").innerHTML = "Move your mouse over a square and click to play an X or an O.";
@@ -123,7 +121,7 @@ function checkWinner() {
         document.getElementById("status").classList.add("you-won");
         document.getElementById("status").innerHTML = "Congratulations! O is the Winner!";
     }
-     if (box[2] !== "" && box[2].textContent === "O" && box[5].textContent === "O" && box[8].textContent === "O") {
+     if (box[2].textContent !== "" && box[2].textContent === "O" && box[5].textContent === "O" && box[8].textContent === "O") {
         document.getElementById("status").classList.add("you-won");
         document.getElementById("status").innerHTML = "Congratulations! O is the Winner!";
     }
